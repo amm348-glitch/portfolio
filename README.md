@@ -7,9 +7,8 @@ Aspirational professional portfolio built with scrollytelling and spec-driven de
 
 ## 🌐 Live Site
 
-**[View Portfolio → https://YOUR-USERNAME.github.io/portfolio/](https://YOUR-USERNAME.github.io/portfolio/)**
+**[View Portfolio → https://amm348-glitch.github.io/portfolio/
 
-*(Replace with your actual GitHub username after deploying)*
 
 ## About
 
