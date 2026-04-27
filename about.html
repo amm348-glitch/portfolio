@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Profile — Arjun Merchant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Syne+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0e0d; --paper: #f5f2ec; --accent: #c94a2b; --muted: #7a7268; --rule: #d6d0c4;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 2.5rem;
+      background: rgba(245,242,236,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; text-decoration: none; color: var(--ink); }
+    .nav-back { font-family: 'Syne Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-decoration: none; color: var(--muted); text-transform: uppercase; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    .page-hero {
+      padding: 10rem 2.5rem 5rem; max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end;
+    }
+    .page-kicker { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .page-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.1; font-weight: 400; }
+    .page-title em { font-style: italic; color: var(--accent); }
+    .page-intro { font-size: 1rem; font-weight: 300; line-height: 1.85; color: #3a3630; margin-bottom: 2rem; }
+    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .meta-item label { font-family: 'Syne Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.3rem; }
+    .meta-item span { font-size: 0.9rem; font-weight: 400; }
+
+    .content-section {
+      max-width: 1100px; margin: 0 auto; padding: 4rem 2.5rem;
+      display: grid; grid-template-columns: 200px 1fr; gap: 4rem;
+      border-top: 1px solid var(--rule);
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .content-section.visible { opacity: 1; transform: translateY(0); }
+    .section-sidebar { position: sticky; top: 6rem; height: fit-content; }
+    .section-label { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+    .section-body h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; margin-bottom: 1.5rem; line-height: 1.2; }
+    .section-body h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin: 2.5rem 0 0.7rem; }
+    .section-body p { font-size: 0.97rem; font-weight: 300; line-height: 1.85; color: #3a3630; margin-bottom: 1rem; max-width: 65ch; }
+    .divider { width: 48px; height: 2px; background: var(--accent); margin: 1.5rem 0 2rem; }
+
+    /* EDU BLOCKS */
+    .edu-block { background: #f0ece4; border-radius: 4px; padding: 1.8rem; margin-bottom: 1.2rem; }
+    .edu-school { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .edu-meta { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+    .edu-honors { font-family: 'Syne Mono', monospace; font-size: 0.68rem; color: var(--accent); margin-top: 0.6rem; }
+
+    /* COURSE TABLE */
+    .course-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .course-table th { font-family: 'Syne Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+    .course-table td { font-size: 0.88rem; font-weight: 300; color: #3a3630; padding: 0.8rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .course-table tr:last-child td { border-bottom: none; }
+
+    /* CALLOUT */
+    .callout { background: var(--ink); color: var(--paper); border-radius: 4px; padding: 2.2rem; margin-top: 2rem; }
+    .callout h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.7rem; color: var(--paper) !important; margin-top: 0 !important; }
+    .callout p { font-size: 0.9rem; font-weight: 300; line-height: 1.8; color: rgba(245,242,236,0.7) !important; max-width: 58ch; margin: 0; }
+
+    /* SKILL CATEGORIES */
+    .skill-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+    .skill-cat h4 { font-family: 'Syne Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .skill-cat ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .skill-cat li { font-size: 0.88rem; font-weight: 300; color: #3a3630; padding-left: 1rem; position: relative; }
+    .skill-cat li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+
+    .back-section { max-width: 1100px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
+    .btn-back { display: inline-block; padding: 0.75rem 1.75rem; font-family: 'Syne Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--rule); color: var(--muted); border-radius: 2px; transition: all 0.2s; }
+    .btn-back:hover { border-color: var(--accent); color: var(--accent); }
+
+    footer { background: var(--ink); color: rgba(245,242,236,0.3); padding: 2rem 2.5rem; font-size: 0.72rem; font-family: 'Syne Mono', monospace; display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      .page-hero { grid-template-columns: 1fr; gap: 2rem; }
+      .content-section { grid-template-columns: 1fr; gap: 1.5rem; }
+      .section-sidebar { position: static; }
+      .skill-cats { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Arjun Merchant</a>
+  <a class="nav-back" href="index.html">← Back to Portfolio</a>
+</nav>
+
+<div class="page-hero">
+  <div>
+    <p class="page-kicker">Full Profile</p>
+    <h1 class="page-title">Business analyst<br>in <em>progress.</em></h1>
+  </div>
+  <div>
+    <p class="page-intro">A complete look at my education, work experience, skills, and professional direction — from Temple to NJIT, from data dashboards to product strategy.</p>
+    <div class="meta-grid">
+      <div class="meta-item"><label>Current Institution</label><span>NJIT — Ying Wu College of Computing</span></div>
+      <div class="meta-item"><label>Degree</label><span>B.S. Business &amp; Information Systems</span></div>
+      <div class="meta-item"><label>Minor</label><span>Innovation &amp; Entrepreneurship</span></div>
+      <div class="meta-item"><label>GPA</label><span>4.00 / 4.00</span></div>
+      <div class="meta-item"><label>Honors</label><span>Albert Dorman Honors College · Ying Wu Honors</span></div>
+      <div class="meta-item"><label>Graduation</label><span>May 2028 (expected)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section class="content-section" id="education">
+  <div class="section-sidebar"><div class="section-label">Education</div></div>
+  <div class="section-body">
+    <h2>Academic background</h2>
+    <div class="divider"></div>
+
+    <div class="edu-block">
+      <div class="edu-school">NJIT — Ying Wu College of Computing · Newark, NJ</div>
+      <div class="edu-degree">B.S. Business &amp; Information Systems</div>
+      <div class="edu-meta">Minor: Innovation &amp; Entrepreneurship · Aug 2025 – Present<br>GPA: 4.00 · Fall '25 Dean's List</div>
+      <div class="edu-honors">Albert Dorman Honors College · Ying Wu Honors Program</div>
+      <div class="edu-meta" style="margin-top:0.8rem">Relevant Coursework: Financial Markets, Corporate Finance, Analytics, Network Technology, Research Methodologies, Statistics</div>
+    </div>
+
+    <div class="edu-block">
+      <div class="edu-school">Temple University — Fox School of Business · Philadelphia, PA</div>
+      <div class="edu-degree">B.S. Management Information Systems (Transfer)</div>
+      <div class="edu-meta">Aug 2024 – May 2025 · GPA: 4.00 · Fall '24 + Spring '25 Dean's List</div>
+      <div class="edu-honors">Temple University Honors · Fox Honors — $25,000 Scholarship</div>
+      <div class="edu-meta" style="margin-top:0.8rem">Relevant Coursework: Digital Systems, Business Analytics, Business Law &amp; Ethics, Economics, Organizational Behavior</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="content-section" id="experience">
+  <div class="section-sidebar"><div class="section-label">Experience</div></div>
+  <div class="section-body">
+    <h2>Work experience</h2>
+    <div class="divider"></div>
+
+    <h3>GE Vernova · Product Management Intern</h3>
+    <p style="font-family:'Syne Mono',monospace; font-size:0.7rem; color:var(--muted); margin-bottom:0.8rem; margin-top:-0.3rem">Jun 2025 – Dec 2025 · Rochester, NY</p>
+    <p>Embedded with a cross-functional team spanning engineering, marketing, and operations to deliver product solutions and present findings to senior executives. Took on ownership of the rebranding initiative during GE's corporate split into GE Vernova and GE Aerospace — coordinating messaging consistency across product lines and platforms.</p>
+    <p>Analyzed large operational datasets to identify performance gaps and optimization opportunities across global distribution networks, and translated findings into actionable product strategy recommendations tied to regional market demand.</p>
+
+    <h3>Data Nova · Data Analytics Intern</h3>
+    <p style="font-family:'Syne Mono',monospace; font-size:0.7rem; color:var(--muted); margin-bottom:0.8rem; margin-top:-0.3rem">Jan 2025 – May 2025 · Charlotte, NC</p>
+    <p>Worked directly with client data pipelines to transform raw inputs into decision-ready insights using Python, PHP, and SQL. Collaborated with stakeholders across departments to gather requirements, streamline reporting workflows, and automate manual processes. Designed and delivered interactive dashboards that influenced internal KPIs and strategic planning decisions.</p>
+
+    <h3>Live Long &amp; Profit · Co-Founder &amp; Content Lead</h3>
+    <p style="font-family:'Syne Mono',monospace; font-size:0.7rem; color:var(--muted); margin-bottom:0.8rem; margin-top:-0.3rem">Jan 2021 – Present · Sayreville, NJ</p>
+    <p>Co-founded a financial education brand from scratch, building a community of 60+ beginner investors through structured content on equities, risk management, and long-term financial planning. Grew audience reach by 25% through consistent, high-quality content calibrated for non-technical audiences. Running since sophomore year of high school.</p>
+
+    <div class="callout">
+      <h3>On using AI in my workflow</h3>
+      <p>I use AI as a research accelerator and first-draft collaborator — not a substitute for thinking. My internship work taught me that the value is in the judgment layer: knowing what to trust, what to verify, and what to cut. That applies whether I'm working with a dataset, a stakeholder brief, or an AI-generated output. The process of managing AI is itself a professional skill.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="content-section" id="skills">
+  <div class="section-sidebar"><div class="section-label">Skills</div></div>
+  <div class="section-body">
+    <h2>Skills &amp; tools</h2>
+    <div class="divider"></div>
+    <p>Built through internship experience, coursework, and self-directed projects — not just a list of buzzwords.</p>
+    <div class="skill-cats">
+      <div class="skill-cat">
+        <h4>Technical</h4>
+        <ul>
+          <li>Python (data analysis, automation)</li>
+          <li>SQL (querying, data modeling)</li>
+          <li>Microsoft Excel (advanced modeling)</li>
+          <li>Power BI (dashboard design)</li>
+          <li>PHP</li>
+          <li>HTML / CSS (this site)</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Analytical</h4>
+        <ul>
+          <li>Data + financial analysis</li>
+          <li>Quantitative problem-solving</li>
+          <li>Market research &amp; competitive analysis</li>
+          <li>Dashboard &amp; reporting design</li>
+          <li>Business process analysis</li>
+          <li>Requirements gathering</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Professional</h4>
+        <ul>
+          <li>Stakeholder communication</li>
+          <li>Executive presentations</li>
+          <li>Cross-functional collaboration</li>
+          <li>Workflow automation</li>
+          <li>Content strategy</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Languages</h4>
+        <ul>
+          <li>English (Fluent)</li>
+          <li>Hindi (Fluent)</li>
+          <li>Gujarati (Fluent)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="content-section" id="leadership">
+  <div class="section-sidebar"><div class="section-label">Leadership</div></div>
+  <div class="section-body">
+    <h2>Leadership &amp; involvement</h2>
+    <div class="divider"></div>
+    <table class="course-table">
+      <thead><tr><th>Organization</th><th>Role</th><th>Since</th></tr></thead>
+      <tbody>
+        <tr><td>NJIT Student Senate</td><td>Ying Wu CoC + B.I.S. Representative</td><td>Oct 2025</td></tr>
+        <tr><td>Business Masterminds (NJIT)</td><td>Executive Board — Service Chair</td><td>Sep 2025</td></tr>
+        <tr><td>Hindu Yuva (NJIT)</td><td>Events Planning Coordinator</td><td>Aug 2025</td></tr>
+        <tr><td>Beta Alpha Psi (Temple + NJIT)</td><td>Executive Board — Service Chair</td><td>Sep 2024</td></tr>
+        <tr><td>Vraj Youth</td><td>Camp Counselor</td><td>Jul 2023</td></tr>
+        <tr><td>Jersey Cares / TU Volunteers</td><td>Community Volunteer</td><td>Aug 2024</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1.5rem; font-size:0.88rem; color:var(--muted)">Total community service: 140+ hours across Temple University Volunteers (100+ hrs) and Jersey Cares at NJIT (40+ hrs). Vraj Youth camp counseling: 145+ service hours.</p>
+  </div>
+</section>
+
+<div class="back-section">
+  <a class="btn-back" href="index.html">← Back to Portfolio Home</a>
+</div>
+
+<footer>
+  <span>Arjun Merchant · NJIT BIS · 2025</span>
+  <span>arjunmerchant2006@gmail.com</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.content-section').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

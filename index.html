@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arjun Merchant — IS Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Syne+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ec;
+      --accent: #c94a2b;
+      --muted: #7a7268;
+      --rule: #d6d0c4;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 2.5rem;
+      background: rgba(245,242,236,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; text-decoration: none; color: var(--ink); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .slide {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 7rem 2.5rem 5rem;
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .slide.visible { opacity: 1; transform: translateY(0); }
+    .slide-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+
+    /* HERO */
+    #slide-1 { background: var(--ink); color: var(--paper); }
+    #slide-1 .slide-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-kicker { font-family: 'Syne Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.2rem; }
+    .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5.5vw, 5rem); line-height: 1.07; font-weight: 400; }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-sub { margin-top: 1.8rem; font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(245,242,236,0.65); max-width: 44ch; }
+    .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 0.75rem 1.75rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: white; border: 2px solid var(--accent); }
+    .btn-primary:hover { background: #a83a20; border-color: #a83a20; }
+    .btn-outline { background: transparent; color: var(--paper); border: 2px solid rgba(245,242,236,0.3); }
+    .btn-outline:hover { border-color: var(--paper); }
+    .hero-right { display: flex; flex-direction: column; gap: 1.2rem; }
+    .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.4rem 1.6rem; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.6rem; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.78rem; font-weight: 300; color: rgba(245,242,236,0.5); margin-top: 0.35rem; }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* SHARED */
+    .section-num { font-family: 'DM Serif Display', serif; font-size: 5rem; color: var(--rule); line-height: 1; margin-bottom: 0.5rem; }
+    .section-label { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.2; font-weight: 400; margin-bottom: 1.5rem; }
+    .body-text { font-size: 1rem; font-weight: 300; line-height: 1.85; color: #3a3630; max-width: 58ch; }
+    .divider { width: 48px; height: 2px; background: var(--accent); margin: 1.5rem 0 2rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .tag { font-family: 'Syne Mono', monospace; font-size: 0.7rem; padding: 0.35rem 0.8rem; border: 1px solid var(--rule); border-radius: 2px; color: var(--muted); }
+
+    /* ABOUT */
+    #slide-2 { background: var(--paper); }
+    #slide-2 .slide-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+
+    /* EXPERIENCE */
+    #slide-3 { background: #f0ece4; }
+    .exp-list { display: flex; flex-direction: column; margin-top: 2.5rem; }
+    .exp-item { display: grid; grid-template-columns: 190px 1fr; gap: 2.5rem; padding: 2rem 0; border-top: 1px solid var(--rule); }
+    .exp-item:last-child { border-bottom: 1px solid var(--rule); }
+    .exp-company { font-family: 'Syne Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
+    .exp-date { font-size: 0.78rem; font-weight: 300; color: var(--muted); margin-top: 0.3rem; }
+    .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.6rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .exp-bullets li { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.65; padding-left: 1.1rem; position: relative; }
+    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+
+    /* SKILLS */
+    #slide-4 { background: var(--ink); color: var(--paper); }
+    #slide-4 .section-title { color: var(--paper); }
+    #slide-4 .body-text { color: rgba(245,242,236,0.6); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+    .skill-group h4 { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .skill-item { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+    .skill-name { font-size: 0.88rem; color: var(--paper); }
+    .skill-bar-track { height: 2px; background: rgba(255,255,255,0.1); overflow: hidden; }
+    .skill-bar-fill { height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 1s ease 0.3s; }
+    .slide.visible .skill-bar-fill { transform: scaleX(1); }
+
+    /* LEADERSHIP */
+    #slide-5 { background: var(--paper); }
+    .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+    .lead-card { background: #f0ece4; border-radius: 4px; padding: 1.6rem; border: 1px solid var(--rule); }
+    .lead-org { font-family: 'Syne Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .lead-role { font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .lead-desc { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+    /* CONTACT */
+    #slide-6 { background: var(--accent); color: white; min-height: 60vh; }
+    #slide-6 .section-num { color: rgba(255,255,255,0.12); }
+    #slide-6 .section-title { color: white; }
+    #slide-6 .body-text { color: rgba(255,255,255,0.8); }
+    .contact-links { display: flex; gap: 1.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .contact-link { font-family: 'Syne Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; transition: border-color 0.2s; }
+    .contact-link:hover { border-color: white; }
+
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 200; transition: width 0.1s linear; }
+    footer { background: var(--ink); color: rgba(245,242,236,0.3); padding: 2rem 2.5rem; font-size: 0.72rem; font-family: 'Syne Mono', monospace; letter-spacing: 0.05em; display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      #slide-1 .slide-inner, #slide-2 .slide-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a class="nav-logo" href="#">Arjun Merchant</a>
+  <ul class="nav-links">
+    <li><a href="#slide-2">About</a></li>
+    <li><a href="#slide-3">Experience</a></li>
+    <li><a href="#slide-4">Skills</a></li>
+    <li><a href="#slide-5">Leadership</a></li>
+    <li><a href="about.html">Full Profile →</a></li>
+  </ul>
+</nav>
+
+<!-- SLIDE 1: HERO -->
+<section class="slide" id="slide-1">
+  <div class="slide-inner">
+    <div>
+      <p class="hero-kicker">B.S. Business &amp; Information Systems · NJIT · Class of 2028</p>
+      <h1 class="hero-title">Data-driven.<br><em>Product-minded.</em><br>Future analyst.</h1>
+      <p class="hero-sub">Sophomore at NJIT with internship experience at GE Vernova and Data Nova. Building toward a career where data strategy, product thinking, and stakeholder communication converge.</p>
+      <div class="hero-cta">
+        <a href="#slide-3" class="btn btn-primary">View Experience</a>
+        <a href="about.html" class="btn btn-outline">Full Profile</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-num">4.0</div>
+        <div class="stat-label">GPA — NJIT + Temple University · Consecutive Dean's Lists</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Internships before junior year</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">140+</div>
+          <div class="stat-label">Community service hours</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="font-size:1.35rem; font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.6; color:rgba(245,242,236,0.5)">"The best analysts don't just report what happened — they help organizations decide what to do next."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: ABOUT -->
+<section class="slide" id="slide-2">
+  <div class="slide-inner">
+    <div>
+      <div class="section-num">01</div>
+      <div class="section-label">About</div>
+    </div>
+    <div>
+      <h2 class="section-title">Where information systems meets real-world strategy</h2>
+      <div class="divider"></div>
+      <p class="body-text">I'm Arjun Merchant, a sophomore at NJIT's Ying Wu College of Computing (Albert Dorman Honors College) pursuing a B.S. in Business &amp; Information Systems with a minor in Innovation &amp; Entrepreneurship. Before NJIT, I spent a year at Temple University's Fox School of Business on a $25,000 honors scholarship — 4.0 across both semesters.</p>
+      <p class="body-text" style="margin-top:1.1rem">My background bridges analytics and strategy: I've analyzed operational datasets at GE Vernova, built client dashboards at Data Nova using Python and SQL, and co-founded a financial education brand that's been running since 2021. I'm drawn to roles where turning data into decisions is the actual job.</p>
+      <div class="tag-list">
+        <span class="tag">Product Management</span>
+        <span class="tag">Data Analytics</span>
+        <span class="tag">Business Analysis</span>
+        <span class="tag">Python · SQL</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Financial Markets</span>
+        <span class="tag">Stakeholder Communication</span>
+        <span class="tag">Dashboard Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: EXPERIENCE -->
+<section class="slide" id="slide-3">
+  <div class="slide-inner">
+    <div>
+      <div class="section-num">02</div>
+      <h2 class="section-title">Experience</h2>
+      <div class="divider"></div>
+      <p class="body-text">Two internships and a self-founded brand — all before junior year.</p>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">GE Vernova</div>
+          <div class="exp-date">Jun – Dec 2025 · Rochester, NY</div>
+        </div>
+        <div>
+          <div class="exp-role">Product Management Intern</div>
+          <ul class="exp-bullets">
+            <li>Collaborated across engineering, marketing, and operations to deliver product solutions presented directly to executives</li>
+            <li>Analyzed large operational datasets to identify performance gaps and optimization opportunities across global systems</li>
+            <li>Led rebranding efforts during GE's corporate split, aligning product messaging across platforms</li>
+            <li>Analyzed global market distribution data to uncover expansion opportunities and align product strategy with regional demand</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">Data Nova</div>
+          <div class="exp-date">Jan – May 2025 · Charlotte, NC</div>
+        </div>
+        <div>
+          <div class="exp-role">Data Analytics Intern</div>
+          <ul class="exp-bullets">
+            <li>Transformed raw client data into actionable insights using Python, PHP, and SQL</li>
+            <li>Gathered requirements from cross-functional stakeholders and automated reporting workflows</li>
+            <li>Designed interactive dashboards and presented findings that directly influenced business KPIs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">Live Long &amp; Profit</div>
+          <div class="exp-date">Jan 2021 – Present · Sayreville, NJ</div>
+        </div>
+        <div>
+          <div class="exp-role">Co-Founder &amp; Content Lead</div>
+          <ul class="exp-bullets">
+            <li>Educated 60+ beginner investors on equities, risk, and long-term financial planning through structured content</li>
+            <li>Grew community reach 25% through consistent, high-impact delivery</li>
+            <li>Built accessible educational materials for non-technical audiences on financial decision-making</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: SKILLS -->
+<section class="slide" id="slide-4">
+  <div class="slide-inner">
+    <div>
+      <div class="section-num" style="color:rgba(245,242,236,0.07)">03</div>
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <div class="divider"></div>
+      <p class="body-text">Technical toolkit built through real internship work — not just coursework.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Data &amp; Analytics</h4>
+        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Microsoft Excel</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Power BI</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      </div>
+      <div class="skill-group">
+        <h4>Product &amp; Strategy</h4>
+        <div class="skill-item"><span class="skill-name">Requirements Gathering</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Market Analysis</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Dashboard Design</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Financial Analysis</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      </div>
+      <div class="skill-group">
+        <h4>Professional</h4>
+        <div class="skill-item"><span class="skill-name">Stakeholder Communication</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Executive Presentations</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:84%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Cross-functional Collaboration</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:87%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Workflow Automation</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: LEADERSHIP -->
+<section class="slide" id="slide-5">
+  <div class="slide-inner">
+    <div>
+      <div class="section-num">04</div>
+      <h2 class="section-title">Leadership &amp; involvement</h2>
+      <div class="divider"></div>
+      <p class="body-text">Active across student government, professional organizations, and community service — building the same collaboration skills I use in the field.</p>
+    </div>
+    <div class="leadership-grid">
+      <div class="lead-card">
+        <div class="lead-org">NJIT Student Senate</div>
+        <div class="lead-role">B.I.S. Representative</div>
+        <div class="lead-desc">Represent the BIS program, collaborate with deans on academic issues, chair college-wide meetings, and maintain transparent progress reporting.</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-org">Beta Alpha Psi</div>
+        <div class="lead-role">Executive Board — Service Chair</div>
+        <div class="lead-desc">Professional business fraternity spanning Temple + NJIT. 100+ volunteer hours, industry workshops, and real-world business problem-solving with peers and professionals.</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-org">Business Masterminds</div>
+        <div class="lead-role">Executive Board — Service Chair</div>
+        <div class="lead-desc">Drives practical business education at NJIT. Organizes professional panels, industry networking, and cross-disciplinary programming.</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-org">Hindu Yuva</div>
+        <div class="lead-role">Events Planning Coordinator</div>
+        <div class="lead-desc">Plans events, tracks fundraising budgets, and coordinates proposals — raising $1,000+ per semester for campus cultural programming.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: CONTACT -->
+<section class="slide" id="slide-6">
+  <div class="slide-inner">
+    <div class="section-num">05</div>
+    <h2 class="section-title">Let's connect.</h2>
+    <div class="divider" style="background:rgba(255,255,255,0.5)"></div>
+    <p class="body-text">Open to conversations about product management, data analytics, and IS careers. Reach out anytime.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+      <a class="contact-link" href="mailto:arjunmerchant2006@gmail.com">✉ arjunmerchant2006@gmail.com</a>
+      <a class="contact-link" href="tel:7328169322">✆ (732) 816-9322</a>
+      <a class="contact-link" href="about.html">→ Full Profile</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Arjun Merchant · NJIT BIS · 2025</span>
+  <span>Spec-driven scrollytelling · IT310</span>
+</footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    progress.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.slide').forEach(s => obs.observe(s));
+  document.getElementById('slide-1').classList.add('visible');
+</script>
+</body>
+</html>
