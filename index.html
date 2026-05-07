@@ -18,11 +18,12 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
 
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.1rem 2.5rem;
-      background: rgba(245,242,236,0.92); backdrop-filter: blur(8px);
+      background: rgba(245,242,236,0.93); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--rule);
     }
     .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; text-decoration: none; color: var(--ink); }
@@ -30,6 +31,7 @@
     .nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
+    /* SLIDE SYSTEM */
     .slide {
       min-height: 100vh; display: flex; align-items: center;
       padding: 7rem 2.5rem 5rem;
@@ -39,26 +41,57 @@
     .slide.visible { opacity: 1; transform: translateY(0); }
     .slide-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
 
-    /* HERO */
-    #slide-1 { background: var(--ink); color: var(--paper); }
-    #slide-1 .slide-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    /* SLIDE 1: HERO */
+    #slide-1 {
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    #slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(201,74,43,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(201,74,43,0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    #slide-1 .slide-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
     .hero-kicker { font-family: 'Syne Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.2rem; }
     .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5.5vw, 5rem); line-height: 1.07; font-weight: 400; }
     .hero-title em { font-style: italic; color: var(--accent); }
-    .hero-sub { margin-top: 1.8rem; font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(245,242,236,0.65); max-width: 44ch; }
+    .hero-sub { margin-top: 1.8rem; font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(245,242,236,0.65); max-width: 46ch; }
     .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn { display: inline-block; padding: 0.75rem 1.75rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; }
     .btn-primary { background: var(--accent); color: white; border: 2px solid var(--accent); }
     .btn-primary:hover { background: #a83a20; border-color: #a83a20; }
     .btn-outline { background: transparent; color: var(--paper); border: 2px solid rgba(245,242,236,0.3); }
     .btn-outline:hover { border-color: var(--paper); }
-    .hero-right { display: flex; flex-direction: column; gap: 1.2rem; }
-    .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.4rem 1.6rem; }
-    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.6rem; color: var(--accent); line-height: 1; }
-    .stat-label { font-size: 0.78rem; font-weight: 300; color: rgba(245,242,236,0.5); margin-top: 0.35rem; }
-    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-    /* SHARED */
+    /* HERO PHOTO CARD */
+    .hero-photo-col { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    .headshot-wrap {
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(201,74,43,0.5);
+      box-shadow: 0 0 0 8px rgba(201,74,43,0.08), 0 24px 60px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+    }
+    .headshot-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; width: 100%; }
+    .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1rem 1.2rem; text-align: center; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.7rem; font-weight: 300; color: rgba(245,242,236,0.45); margin-top: 0.3rem; line-height: 1.4; }
+
+    /* SHARED SECTION STYLES */
     .section-num { font-family: 'DM Serif Display', serif; font-size: 5rem; color: var(--rule); line-height: 1; margin-bottom: 0.5rem; }
     .section-label { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
     .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.2; font-weight: 400; margin-bottom: 1.5rem; }
@@ -67,44 +100,83 @@
     .tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
     .tag { font-family: 'Syne Mono', monospace; font-size: 0.7rem; padding: 0.35rem 0.8rem; border: 1px solid var(--rule); border-radius: 2px; color: var(--muted); }
 
-    /* ABOUT */
+    /* SLIDE 2: ABOUT */
     #slide-2 { background: var(--paper); }
     #slide-2 .slide-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
 
-    /* EXPERIENCE */
-    #slide-3 { background: #f0ece4; }
+    /* SLIDE 3: EXPERIENCE */
+    #slide-3 {
+      background: #0f0e0d;
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    #slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80&auto=format&fit=crop') center/cover no-repeat;
+      opacity: 0.07;
+    }
+    #slide-3 .slide-inner { position: relative; z-index: 1; }
+    #slide-3 .section-num { color: rgba(245,242,236,0.07); }
+    #slide-3 .section-title { color: var(--paper); }
+    #slide-3 .body-text { color: rgba(245,242,236,0.6); }
     .exp-list { display: flex; flex-direction: column; margin-top: 2.5rem; }
-    .exp-item { display: grid; grid-template-columns: 190px 1fr; gap: 2.5rem; padding: 2rem 0; border-top: 1px solid var(--rule); }
-    .exp-item:last-child { border-bottom: 1px solid var(--rule); }
+    .exp-item { display: grid; grid-template-columns: 190px 1fr; gap: 2.5rem; padding: 2.2rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+    .exp-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
     .exp-company { font-family: 'Syne Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
-    .exp-date { font-size: 0.78rem; font-weight: 300; color: var(--muted); margin-top: 0.3rem; }
-    .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.6rem; }
-    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
-    .exp-bullets li { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.65; padding-left: 1.1rem; position: relative; }
+    .exp-date { font-size: 0.78rem; font-weight: 300; color: rgba(245,242,236,0.4); margin-top: 0.3rem; }
+    .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.7rem; color: var(--paper); }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-bullets li { font-size: 0.88rem; font-weight: 300; color: rgba(245,242,236,0.6); line-height: 1.65; padding-left: 1.1rem; position: relative; }
     .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+    .exp-highlight {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-family: 'Syne Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border: 1px solid rgba(201,74,43,0.4);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
 
-    /* SKILLS */
-    #slide-4 { background: var(--ink); color: var(--paper); }
-    #slide-4 .section-title { color: var(--paper); }
-    #slide-4 .body-text { color: rgba(245,242,236,0.6); }
+    /* SLIDE 4: SKILLS */
+    #slide-4 { background: #f0ece4; }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
     .skill-group h4 { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
     .skill-item { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
-    .skill-name { font-size: 0.88rem; color: var(--paper); }
-    .skill-bar-track { height: 2px; background: rgba(255,255,255,0.1); overflow: hidden; }
+    .skill-name { font-size: 0.88rem; color: var(--ink); font-weight: 400; }
+    .skill-bar-track { height: 2px; background: rgba(0,0,0,0.1); overflow: hidden; }
     .skill-bar-fill { height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 1s ease 0.3s; }
     .slide.visible .skill-bar-fill { transform: scaleX(1); }
 
-    /* LEADERSHIP */
+    /* SLIDE 5: LEADERSHIP */
     #slide-5 { background: var(--paper); }
     .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
-    .lead-card { background: #f0ece4; border-radius: 4px; padding: 1.6rem; border: 1px solid var(--rule); }
+    .lead-card { background: #f0ece4; border-radius: 4px; padding: 1.6rem; border: 1px solid var(--rule); transition: transform 0.2s, box-shadow 0.2s; }
+    .lead-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,14,13,0.08); }
     .lead-org { font-family: 'Syne Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
     .lead-role { font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.5rem; }
     .lead-desc { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
 
-    /* CONTACT */
-    #slide-6 { background: var(--accent); color: white; min-height: 60vh; }
+    /* SLIDE 6: CONTACT */
+    #slide-6 {
+      background: var(--accent);
+      color: white;
+      min-height: 65vh;
+      position: relative;
+      overflow: hidden;
+    }
+    #slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+    #slide-6 .slide-inner { position: relative; z-index: 1; }
     #slide-6 .section-num { color: rgba(255,255,255,0.12); }
     #slide-6 .section-title { color: white; }
     #slide-6 .body-text { color: rgba(255,255,255,0.8); }
@@ -112,14 +184,23 @@
     .contact-link { font-family: 'Syne Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; transition: border-color 0.2s; }
     .contact-link:hover { border-color: white; }
 
+    /* PROGRESS */
     .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 200; transition: width 0.1s linear; }
+
     footer { background: var(--ink); color: rgba(245,242,236,0.3); padding: 2rem 2.5rem; font-size: 0.72rem; font-family: 'Syne Mono', monospace; letter-spacing: 0.05em; display: flex; justify-content: space-between; }
 
+    @media (max-width: 900px) {
+      #slide-1 .slide-inner { grid-template-columns: 1fr; }
+      .hero-photo-col { flex-direction: row; justify-content: flex-start; }
+      .headshot-wrap { width: 120px; height: 120px; }
+      .hero-stats { grid-template-columns: repeat(4, 1fr); }
+    }
     @media (max-width: 768px) {
-      #slide-1 .slide-inner, #slide-2 .slide-inner { grid-template-columns: 1fr; gap: 2rem; }
+      #slide-2 .slide-inner { grid-template-columns: 1fr; gap: 2rem; }
       .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1rem; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -143,30 +224,34 @@
   <div class="slide-inner">
     <div>
       <p class="hero-kicker">B.S. Business &amp; Information Systems · NJIT · Class of 2028</p>
-      <h1 class="hero-title">Data-driven.<br><em>Product-minded.</em><br>Future analyst.</h1>
-      <p class="hero-sub">Sophomore at NJIT with internship experience at GE Vernova and Data Nova. Building toward a career where data strategy, product thinking, and stakeholder communication converge.</p>
+      <h1 class="hero-title">Data analyst.<br>Product thinker.<br><em>AI builder.</em></h1>
+      <p class="hero-sub">Sophomore at NJIT with hands-on experience building AI systems at GE Vernova and delivering financial analytics at Data Nova. I turn data into decisions and systems into strategy.</p>
       <div class="hero-cta">
         <a href="#slide-3" class="btn btn-primary">View Experience</a>
         <a href="about.html" class="btn btn-outline">Full Profile</a>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="stat-card">
-        <div class="stat-num">4.0</div>
-        <div class="stat-label">GPA — NJIT + Temple University · Consecutive Dean's Lists</div>
+    <div class="hero-photo-col">
+      <div class="headshot-wrap">
+        <img src="headshot.jpg" alt="Arjun Merchant" />
       </div>
-      <div class="stat-row">
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">4.0</div>
+          <div class="stat-label">GPA across NJIT + Temple</div>
+        </div>
         <div class="stat-card">
           <div class="stat-num">2</div>
           <div class="stat-label">Internships before junior year</div>
         </div>
         <div class="stat-card">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">LLM project lead at GE Vernova</div>
+        </div>
+        <div class="stat-card">
           <div class="stat-num">140+</div>
           <div class="stat-label">Community service hours</div>
         </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" style="font-size:1.35rem; font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.6; color:rgba(245,242,236,0.5)">"The best analysts don't just report what happened — they help organizations decide what to do next."</div>
       </div>
     </div>
   </div>
@@ -180,19 +265,19 @@
       <div class="section-label">About</div>
     </div>
     <div>
-      <h2 class="section-title">Where information systems meets real-world strategy</h2>
+      <h2 class="section-title">Where information systems meets real-world impact</h2>
       <div class="divider"></div>
-      <p class="body-text">I'm Arjun Merchant, a sophomore at NJIT's Ying Wu College of Computing (Albert Dorman Honors College) pursuing a B.S. in Business &amp; Information Systems with a minor in Innovation &amp; Entrepreneurship. Before NJIT, I spent a year at Temple University's Fox School of Business on a $25,000 honors scholarship — 4.0 across both semesters.</p>
-      <p class="body-text" style="margin-top:1.1rem">My background bridges analytics and strategy: I've analyzed operational datasets at GE Vernova, built client dashboards at Data Nova using Python and SQL, and co-founded a financial education brand that's been running since 2021. I'm drawn to roles where turning data into decisions is the actual job.</p>
+      <p class="body-text">I'm Arjun Merchant, a sophomore at NJIT's Albert Dorman Honors College pursuing a B.S. in Business &amp; Information Systems with a minor in Innovation &amp; Entrepreneurship. Before NJIT, I spent a year at Temple University's Fox School of Business on a $25,000 honors scholarship — 4.0 across both semesters.</p>
+      <p class="body-text" style="margin-top:1.1rem">My background is hands-on. At GE Vernova I led the intern team on an AI development project, building an internal LLM-powered assistant on top of company data. At Data Nova I delivered financial analytics dashboards directly to clients using Python, SQL, and Power BI. I'm building toward a career at the intersection of AI, product strategy, and data-driven decision-making.</p>
       <div class="tag-list">
+        <span class="tag">AI / LLM Development</span>
         <span class="tag">Product Management</span>
         <span class="tag">Data Analytics</span>
-        <span class="tag">Business Analysis</span>
         <span class="tag">Python · SQL</span>
         <span class="tag">Power BI</span>
-        <span class="tag">Financial Markets</span>
+        <span class="tag">Financial Analytics</span>
         <span class="tag">Stakeholder Communication</span>
-        <span class="tag">Dashboard Design</span>
+        <span class="tag">Business Strategy</span>
       </div>
     </div>
   </div>
@@ -205,7 +290,7 @@
       <div class="section-num">02</div>
       <h2 class="section-title">Experience</h2>
       <div class="divider"></div>
-      <p class="body-text">Two internships and a self-founded brand — all before junior year.</p>
+      <p class="body-text">Two internships — one building AI, one delivering analytics — before junior year.</p>
     </div>
     <div class="exp-list">
       <div class="exp-item">
@@ -216,11 +301,13 @@
         <div>
           <div class="exp-role">Product Management Intern</div>
           <ul class="exp-bullets">
-            <li>Collaborated across engineering, marketing, and operations to deliver product solutions presented directly to executives</li>
+            <li>Led the intern team on an AI development project — built an internal LLM-powered assistant capable of answering company policy, procedure, and product questions using enterprise data</li>
+            <li>Owned end-to-end development: data gathering, preprocessing, model integration, and deployment into internal workflows</li>
             <li>Analyzed large operational datasets to identify performance gaps and optimization opportunities across global systems</li>
-            <li>Led rebranding efforts during GE's corporate split, aligning product messaging across platforms</li>
-            <li>Analyzed global market distribution data to uncover expansion opportunities and align product strategy with regional demand</li>
+            <li>Led rebranding efforts during GE's corporate split, aligning product messaging across platforms for GE Vernova</li>
+            <li>Presented findings and product recommendations directly to executive stakeholders</li>
           </ul>
+          <span class="exp-highlight">↑ Led intern AI/LLM development team</span>
         </div>
       </div>
       <div class="exp-item">
@@ -231,24 +318,11 @@
         <div>
           <div class="exp-role">Data Analytics Intern</div>
           <ul class="exp-bullets">
-            <li>Transformed raw client data into actionable insights using Python, PHP, and SQL</li>
-            <li>Gathered requirements from cross-functional stakeholders and automated reporting workflows</li>
-            <li>Designed interactive dashboards and presented findings that directly influenced business KPIs</li>
+            <li>Delivered financial analytics work directly to clients — transforming raw financial data into structured insights using Python, PHP, and SQL</li>
+            <li>Designed interactive dashboards tracking client financial KPIs, presented findings to stakeholders to drive strategic decisions</li>
+            <li>Gathered requirements from cross-functional teams, streamlined reporting workflows, and automated recurring analysis processes</li>
           </ul>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">Live Long &amp; Profit</div>
-          <div class="exp-date">Jan 2021 – Present · Sayreville, NJ</div>
-        </div>
-        <div>
-          <div class="exp-role">Co-Founder &amp; Content Lead</div>
-          <ul class="exp-bullets">
-            <li>Educated 60+ beginner investors on equities, risk, and long-term financial planning through structured content</li>
-            <li>Grew community reach 25% through consistent, high-impact delivery</li>
-            <li>Built accessible educational materials for non-technical audiences on financial decision-making</li>
-          </ul>
+          <span class="exp-highlight">↑ Client-facing financial analytics</span>
         </div>
       </div>
     </div>
@@ -259,32 +333,33 @@
 <section class="slide" id="slide-4">
   <div class="slide-inner">
     <div>
-      <div class="section-num" style="color:rgba(245,242,236,0.07)">03</div>
+      <div class="section-num">03</div>
       <h2 class="section-title">Skills &amp; Tools</h2>
       <div class="divider"></div>
-      <p class="body-text">Technical toolkit built through real internship work — not just coursework.</p>
+      <p class="body-text">Built through real internship work — not just coursework.</p>
     </div>
     <div class="skills-grid">
       <div class="skill-group">
-        <h4>Data &amp; Analytics</h4>
-        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+        <h4>AI &amp; Data</h4>
+        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">LLM Integration</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Power BI</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Microsoft Excel</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Power BI</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
       </div>
       <div class="skill-group">
         <h4>Product &amp; Strategy</h4>
         <div class="skill-item"><span class="skill-name">Requirements Gathering</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Market Analysis</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Financial Analytics</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Dashboard Design</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Financial Analysis</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
       </div>
       <div class="skill-group">
         <h4>Professional</h4>
+        <div class="skill-item"><span class="skill-name">Executive Presentations</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Stakeholder Communication</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Executive Presentations</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:84%"></div></div></div>
         <div class="skill-item"><span class="skill-name">Cross-functional Collaboration</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:87%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Workflow Automation</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Workflow Automation</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div></div>
       </div>
     </div>
   </div>
@@ -308,7 +383,7 @@
       <div class="lead-card">
         <div class="lead-org">Beta Alpha Psi</div>
         <div class="lead-role">Executive Board — Service Chair</div>
-        <div class="lead-desc">Professional business fraternity spanning Temple + NJIT. 100+ volunteer hours, industry workshops, and real-world business problem-solving with peers and professionals.</div>
+        <div class="lead-desc">Professional business fraternity spanning Temple + NJIT. 100+ volunteer hours, industry workshops, and real-world business problem-solving with professionals.</div>
       </div>
       <div class="lead-card">
         <div class="lead-org">Business Masterminds</div>
@@ -330,7 +405,7 @@
     <div class="section-num">05</div>
     <h2 class="section-title">Let's connect.</h2>
     <div class="divider" style="background:rgba(255,255,255,0.5)"></div>
-    <p class="body-text">Open to conversations about product management, data analytics, and IS careers. Reach out anytime.</p>
+    <p class="body-text">Open to conversations about AI product roles, data analytics, and IS careers. Reach out anytime.</p>
     <div class="contact-links">
       <a class="contact-link" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
       <a class="contact-link" href="mailto:arjunmerchant2006@gmail.com">✉ arjunmerchant2006@gmail.com</a>
