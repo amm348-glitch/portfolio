@@ -78,14 +78,14 @@
     /* HERO PHOTO CARD */
     .hero-photo-col { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
     .headshot-wrap {
-      width: 300px; height: 380px;
-      border-radius: 12px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
       overflow: hidden;
       border: 3px solid rgba(201,74,43,0.5);
       box-shadow: 0 0 0 8px rgba(201,74,43,0.08), 0 24px 60px rgba(0,0,0,0.4);
       flex-shrink: 0;
     }
-    .headshot-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%;; }
+    .headshot-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; width: 100%; }
     .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1rem 1.2rem; text-align: center; }
     .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--accent); line-height: 1; }
@@ -213,8 +213,9 @@
   <ul class="nav-links">
     <li><a href="#slide-2">About</a></li>
     <li><a href="#slide-3">Experience</a></li>
-    <li><a href="#slide-4">Skills</a></li>
-    <li><a href="#slide-5">Leadership</a></li>
+    <li><a href="#slide-4">Projects</a></li>
+    <li><a href="#slide-5">Skills</a></li>
+    <li><a href="#slide-6">Leadership</a></li>
     <li><a href="about.html">Full Profile →</a></li>
   </ul>
 </nav>
@@ -329,11 +330,43 @@
   </div>
 </section>
 
-<!-- SLIDE 4: SKILLS -->
+<!-- SLIDE 4: PROJECTS -->
 <section class="slide" id="slide-4">
   <div class="slide-inner">
     <div>
       <div class="section-num">03</div>
+      <h2 class="section-title">Projects</h2>
+      <div class="divider"></div>
+      <p class="body-text">Academic and personal projects that complement my internship experience.</p>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:1.5rem; margin-top:2.5rem;">
+      <a href="https://amm348-glitch.github.io/sports-legacy-museum" target="_blank" style="display:block; background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:2rem; text-decoration:none; color:inherit; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 32px rgba(15,14,13,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-family:'Syne Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Web Development · Information Architecture</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:1.4rem; font-weight:400; margin-bottom:0.8rem;">American Sports Legacy Museum</div>
+        <div style="font-size:0.88rem; font-weight:300; color:var(--muted); line-height:1.7;">A multi-page museum website with full exhibit pages, consistent navigation, and responsive design — built and deployed on GitHub Pages for IT310.</div>
+        <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--rule); font-family:'Syne Mono',monospace; font-size:0.65rem; color:var(--muted);">HTML · CSS · JavaScript · GitHub Pages · ↗ Live Site</div>
+      </a>
+      <a href="about.html#aspirational" style="display:block; background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:2rem; text-decoration:none; color:inherit; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 32px rgba(15,14,13,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-family:'Syne Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">In Development · AI / LLM</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:1.4rem; font-weight:400; margin-bottom:0.8rem;">Enterprise Knowledge Base Tool</div>
+        <div style="font-size:0.88rem; font-weight:300; color:var(--muted); line-height:1.7;">Extending the LLM work from GE Vernova — a lightweight tool that lets small businesses index internal documentation and query it conversationally using RAG architecture.</div>
+        <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--rule); font-family:'Syne Mono',monospace; font-size:0.65rem; color:var(--muted);">Python · LLM · RAG · → View Details</div>
+      </a>
+      <a href="about.html#aspirational" style="display:block; background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:2rem; text-decoration:none; color:inherit; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 32px rgba(15,14,13,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-family:'Syne Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">In Development · Data Analytics</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:1.4rem; font-weight:400; margin-bottom:0.8rem;">Financial Analytics Dashboard</div>
+        <div style="font-size:0.88rem; font-weight:300; color:var(--muted); line-height:1.7;">A personal finance analytics dashboard built on the Power BI and Python pipeline work from Data Nova — owning the full project from data modeling through visualization design.</div>
+        <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--rule); font-family:'Syne Mono',monospace; font-size:0.65rem; color:var(--muted);">Python · Power BI · SQL · → View Details</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: SKILLS -->
+<section class="slide" id="slide-4">
+  <div class="slide-inner">
+    <div>
+      <div class="section-num">04</div>
       <h2 class="section-title">Skills &amp; Tools</h2>
       <div class="divider"></div>
       <p class="body-text">Built through real internship work — not just coursework.</p>
@@ -369,7 +402,7 @@
 <section class="slide" id="slide-5">
   <div class="slide-inner">
     <div>
-      <div class="section-num">04</div>
+      <div class="section-num">05</div>
       <h2 class="section-title">Leadership &amp; involvement</h2>
       <div class="divider"></div>
       <p class="body-text">Active across student government, professional organizations, and community service — building the same collaboration skills I use in the field.</p>
@@ -407,7 +440,7 @@
     <div class="divider" style="background:rgba(255,255,255,0.5)"></div>
     <p class="body-text">Open to conversations about AI product roles, data analytics, and IS careers. Reach out anytime.</p>
     <div class="contact-links">
-      <a class="contact-link" href="https://www.linkedin.com/in/arjun-merchant-578069271/" target="_blank">↗ LinkedIn</a>
+      <a class="contact-link" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
       <a class="contact-link" href="mailto:arjunmerchant2006@gmail.com">✉ arjunmerchant2006@gmail.com</a>
       <a class="contact-link" href="tel:7328169322">✆ (732) 816-9322</a>
       <a class="contact-link" href="about.html">→ Full Profile</a>
